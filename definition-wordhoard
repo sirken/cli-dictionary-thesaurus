@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+
+from wordhoard import Definitions
+import sys
+
+args = ' '.join(sys.argv[1:])
+# args = 'hangry'
+
+if len(args.strip()) == 0:
+    print("You'll need to enter a word to continue...")
+    exit(1)
+
+definition = Definitions(search_string=args, output_format='json')
+definition_results = definition.find_definitions()
+print(definition_results)

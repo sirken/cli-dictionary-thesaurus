@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+
+import requests
+import sys
+import json
+
+args = ' '.join(sys.argv[1:])
+# args = 'hangry'
+
+if len(args.strip()) == 0:
+    print("You'll need to enter a word to continue...")
+    exit(1)
+
+# clean json, drop empty values
+def clean_empty(json_data):
+    if isinstance(json_data, dict):
+        return {
+            key: value
+            for key, value in ((key, clean_empty(value)) for key, value in json_data.items())
+            if value
+        }
+    if isinstance(json_data, list):
+        return [value for value in map(clean_empty, json_data) if value]
+    return json_data
+
+query = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{args}')
+# do not ensure ascii so unicode stays human readable
+j = json.dumps(query.json(), indent=2, ensure_ascii=False)
+# load data as json
+data = json.loads(j)
+# clean json
+k = json.dumps(clean_empty(data), indent=2, ensure_ascii=False)
+print(k)
+print(query.status_code)
+
+

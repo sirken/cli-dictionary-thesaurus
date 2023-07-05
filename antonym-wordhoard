@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+
+from wordhoard import Antonyms
+import sys
+
+args = ' '.join(sys.argv[1:])
+# args = 'hungry'
+
+if len(args.strip()) == 0:
+    print("You'll need to enter a word to continue...")
+    exit(1)
+
+ant = Antonyms(search_string=args, output_format='json')
+ant_results = ant.find_antonyms()
+print(ant_results)
