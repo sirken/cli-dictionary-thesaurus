@@ -4,7 +4,7 @@ from AyDictionary import AyDictionary
 import sys
 
 args = ' '.join(sys.argv[1:])
-args = 'hangry'
+# args = 'hangry'
 
 if len(args.strip()) == 0:
     print("You'll need to enter a word to continue...")
