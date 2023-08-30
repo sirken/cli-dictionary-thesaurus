@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+import json
+from AyDictionary import AyDictionary
+import sys
+
+args = ' '.join(sys.argv[1:])
+args = 'hangry'
+
+if len(args.strip()) == 0:
+    print("You'll need to enter a word to continue...")
+    exit(1)
+
+definition = AyDictionary().meaning(args)
+# print(definition)
+
+print(f'{args} ##################')
+if definition:
+    for key in definition:
+        print(f'[{key}] ----------\\')
+        for d in definition[key]:
+            print(f'-> {d}')
+else:
+    print('-> No definition found')
